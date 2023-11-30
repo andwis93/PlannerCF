@@ -1,2 +1,2 @@
-import {applyTheme as _applyTheme} from './theme-plannercfapp.generated.js';
+import {applyTheme as _applyTheme} from './theme-plannercf.generated.js';
 export const applyTheme = _applyTheme;

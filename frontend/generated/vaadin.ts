@@ -4,6 +4,6 @@ import './index';
 
 import 'Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.js';
 
-import './theme-plannercfapp.global.generated.js';
+import './theme-plannercf.global.generated.js';
 import { applyTheme } from './theme.js';
 applyTheme(document);

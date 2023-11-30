@@ -1,4 +1,4 @@
-package com.planner.PlannerCF;
+package com.plannercf;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@Theme(value = "plannercfapp")
+@Theme(value = "plannercf")
 @PWA(
 		name = "PlannerCFApp",
 		shortName = "PCF")
