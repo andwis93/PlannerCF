@@ -1,4 +1,4 @@
-package com.awplanner.PlannerCF.backend.domain;
+package com.plannercf.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
