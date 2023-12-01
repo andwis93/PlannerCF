@@ -54,7 +54,10 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+<<<<<<< HEAD
+			<version>2.2.224</version>
 			<scope>test</scope>
+>>>>>>> DayDomain
 		</dependency>
 
 		<dependency>
