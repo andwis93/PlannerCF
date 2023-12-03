@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -14,4 +15,8 @@ public interface DayRepository extends CrudRepository<Day, Long> {
     Optional<Day> findDayByDate(LocalDate date);
 
     void deleteByDate(LocalDate date);
+
+    boolean existsDayByDate(LocalDate date);
+
+    List<Day> findAll();
 }
