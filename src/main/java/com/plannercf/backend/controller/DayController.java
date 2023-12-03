@@ -33,7 +33,8 @@ public class DayController {
     }
 
     @PostMapping(path = "/many")
-    public ResponseEntity<Void> createDays(@RequestParam int numberOfDays, @RequestParam LocalDate date) {
+    public ResponseEntity<Void> createDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) {
+        facade.createDays(dayQty, startDate);
         return ResponseEntity.ok().build();
     }
 

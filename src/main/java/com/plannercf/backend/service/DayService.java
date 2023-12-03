@@ -35,6 +35,18 @@ public class DayService {
         }
     }
 
+    public void createDays(int dayQty, LocalDate startDate) {
+        int counter = 0;
+        long days = 0;
+        while (counter < dayQty) {
+            DayDto dayDto = new DayDto(startDate.plusDays(days));
+            if (createDay(dayDto)) {
+                counter++;
+            }
+            days++;
+        }
+    }
+
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {
         if (isDayExistByDate(date)) {
             return repository.findDayByDate(date).orElseThrow(RecordNotExistsException::new);

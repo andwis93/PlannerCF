@@ -22,6 +22,10 @@ public class PCFFacade {
         return dayService.createDay(dayDto);
     }
 
+    public void createDays(int dayQty, LocalDate startDate) {
+        dayService.createDays(dayQty, startDate);
+    }
+
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {
         return dayService.getDayByDate(date);
     }
