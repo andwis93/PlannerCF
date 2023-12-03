@@ -59,6 +59,16 @@ public class DayService {
         return repository.findAll();
     }
 
+    public void changeDay(DayDto dayDto) throws RecordNotExistsException {
+        if (isDayExistByDate(dayDto.getDate())) {
+            Day day = getDayByDate(dayDto.getDate());
+            day.setDayName(dayDto.getDayName());
+            repository.save(day);
+        } else {
+            throw new RecordNotExistsException();
+        }
+    }
+
     public void deleteDay(LocalDate date) {
         repository.deleteByDate(date);
     }

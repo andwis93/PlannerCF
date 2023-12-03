@@ -48,9 +48,10 @@ public class DayController {
         return ResponseEntity.ok(mapper.mapToDtoList(facade.getAllDays()));
     }
 
-    @PutMapping(value = "/change/{date}")
-    public ResponseEntity<Day> updateDay(@PathVariable("date") LocalDate date) {
-        return ResponseEntity.ok(new Day(LocalDate.now()));
+    @PutMapping(path = "/change")
+    public ResponseEntity<Void> updateDay(@RequestBody DayDto dayDto) throws RecordNotExistsException{
+        facade.changeDay(dayDto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "{date}")

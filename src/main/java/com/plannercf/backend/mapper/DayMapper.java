@@ -18,7 +18,7 @@ public class DayMapper {
         );
     }
 
-    public Day mapToDay (DayDto dayDto) {
+    public Day mapToDay(DayDto dayDto) {
         return new Day(dayDto.getDate());
     }
 
