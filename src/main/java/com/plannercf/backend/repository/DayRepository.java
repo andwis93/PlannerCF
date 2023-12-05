@@ -1,7 +1,9 @@
 package com.plannercf.backend.repository;
 
 import com.plannercf.backend.domain.Day;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,4 +23,7 @@ public interface DayRepository extends CrudRepository<Day, Long> {
 
     @Nonnull
     List<Day> findAll();
+
+    @Query()
+    List<Day> getOldDays(@Param("REFERENCE_DATE") LocalDate date);
 }

@@ -17,4 +17,9 @@ public class DayDto {
     public DayDto(LocalDate date) {
         this.date = date;
     }
+
+    public DayDto(LocalDate date, String dayName) {
+        this.date = date;
+        this.dayName = dayName;
+    }
 }

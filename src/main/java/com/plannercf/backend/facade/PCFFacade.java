@@ -14,7 +14,7 @@ public class PCFFacade {
     private final DayService dayService;
 
     @Autowired
-    public PCFFacade(DayService dayService) {
+    public PCFFacade(final DayService dayService) {
         this.dayService = dayService;
     }
 
@@ -43,5 +43,9 @@ public class PCFFacade {
     }
     public void deleteAll() {
         dayService.deleteAll();
+    }
+
+    public void deleteOldDates(LocalDate date) throws RecordNotExistsException {
+        dayService.deleteOldDays(date);
     }
 }

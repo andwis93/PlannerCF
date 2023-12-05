@@ -17,7 +17,7 @@ public class DayService {
     private final DayMapper mapper;
 
     @Autowired
-    public DayService(DayRepository repository, DayMapper mapper) {
+    public DayService(final DayRepository repository, final DayMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -75,5 +75,14 @@ public class DayService {
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void deleteOldDays(LocalDate date) throws RecordNotExistsException {
+        try {
+            List<Day> days = repository.getOldDays(date);
+            repository.deleteAll(days);
+        } catch (Exception er) {
+            throw new RecordNotExistsException();
+        }
     }
 }

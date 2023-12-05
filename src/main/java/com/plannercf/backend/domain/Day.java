@@ -2,8 +2,8 @@ package com.plannercf.backend.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,11 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@AllArgsConstructor
+@NamedQuery(
+        name = "Day.getOldDays",
+        query = "FROM Day WHERE date < :REFERENCE_DATE"
+)
+
 @NoArgsConstructor
 @Getter
 @Setter

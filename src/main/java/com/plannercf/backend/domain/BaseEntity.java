@@ -12,12 +12,14 @@ import java.util.Objects;
 @Getter
 @Setter
 public abstract class BaseEntity implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     @Column(name = "ID", unique = true)
     private Long id;
+
+    public BaseEntity() {
+    }
 
     @Override
     public boolean equals(Object o) {

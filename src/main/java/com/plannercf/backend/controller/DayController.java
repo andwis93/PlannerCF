@@ -1,6 +1,5 @@
 package com.plannercf.backend.controller;
 
-import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.facade.PCFFacade;
 import com.plannercf.backend.mapper.DayMapper;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -61,7 +61,8 @@ public class DayController {
     }
 
     @DeleteMapping(value = "/old/{date}")
-    public ResponseEntity<Void> deleteOldDays(@PathVariable("date") LocalDate date) {
+    public ResponseEntity<Void> deleteOldDays(@PathVariable("date") LocalDate date) throws RecordNotExistsException {
+        facade.deleteOldDates(date);
         return ResponseEntity.ok().build();
     }
 
