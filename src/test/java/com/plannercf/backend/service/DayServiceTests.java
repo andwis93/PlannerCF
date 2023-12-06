@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
@@ -16,6 +17,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DayServiceTests {
     @Autowired
     private DayService service;
+
+    @Test
+    void isDayExistsByDateTest() throws TestNotCleaned {
+        //Given & When
+        service.createDay(LocalDate.of(2023,12,24));
+
+        //Then
+        assertTrue(service.isDayExistByDate(LocalDate.of(2023,12,24)));
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("isDayExistsByDateTest NOT cleaned");
+        }
+    }
 
     @Test
     void createDayTest() throws RecordNotExistsException, TestNotCleaned {
