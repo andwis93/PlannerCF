@@ -18,8 +18,8 @@ public class PCFFacade {
         this.dayService = dayService;
     }
 
-    public boolean createDay(DayDto dayDto) {
-        return dayService.createDay(dayDto);
+    public boolean createDay(LocalDate date) {
+        return dayService.createDay(date);
     }
 
     public void createDays(int dayQty, LocalDate startDate) {

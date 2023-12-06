@@ -26,9 +26,9 @@ public class DayService {
         return repository.existsDayByDate(date);
     }
 
-    public boolean createDay(DayDto dayDto) {
-        if (!isDayExistByDate(dayDto.getDate())) {
-            repository.save(mapper.mapToDay(dayDto));
+    public boolean createDay(LocalDate date) {
+        if (!isDayExistByDate(date)) {
+            repository.save(new Day(date));
             return true;
         } else {
             return false;
@@ -39,8 +39,8 @@ public class DayService {
         int counter = 0;
         long days = 0;
         while (counter < dayQty) {
-            DayDto dayDto = new DayDto(startDate.plusDays(days));
-            if (createDay(dayDto)) {
+           LocalDate date = startDate.plusDays(days);
+            if (createDay(date)) {
                 counter++;
             }
             days++;

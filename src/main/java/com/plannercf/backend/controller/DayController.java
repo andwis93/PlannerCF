@@ -27,9 +27,9 @@ public class DayController {
         this.mapper = mapper;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, path = "/one")
-    public ResponseEntity<Boolean> createDay(@RequestBody DayDto dayDto) {
-        return ResponseEntity.ok(facade.createDay(dayDto));
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, path = "/one/{date}")
+    public ResponseEntity<Boolean> createDay(@PathVariable("date")LocalDate date) {
+        return ResponseEntity.ok(facade.createDay(date));
     }
 
     @PostMapping(path = "/many")
