@@ -59,6 +59,10 @@ public class DayService {
         return repository.findAll();
     }
 
+    public List<Day> getLatestDay() {
+        return repository.getLatestDate();
+    }
+
     public void changeDay(DayDto dayDto) throws RecordNotExistsException {
         if (isDayExistByDate(dayDto.getDate())) {
             Day day = getDayByDate(dayDto.getDate());

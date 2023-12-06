@@ -34,6 +34,10 @@ public class PCFFacade {
         return dayService.getAllDays();
     }
 
+    public List<Day> getLatestDay() {
+        return dayService.getLatestDay();
+    }
+
     public void changeDay(DayDto dayDto) throws RecordNotExistsException {
         dayService.changeDay(dayDto);
     }

@@ -1,9 +1,6 @@
 package com.plannercf.backend.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +11,13 @@ import java.util.Objects;
 @NamedQuery(
         name = "Day.getOldDays",
         query = "FROM Day WHERE date < :REFERENCE_DATE"
+)
+
+@NamedNativeQuery(
+        name = "Day.getLatestDate",
+        query = "SELECT * FROM days WHERE date IN " +
+                "(SELECT date FROM days WHERE date = (SELECT MAX(date) FROM days))",
+        resultClass = Day.class
 )
 
 @NoArgsConstructor

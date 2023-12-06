@@ -26,4 +26,7 @@ public interface DayRepository extends CrudRepository<Day, Long> {
 
     @Query()
     List<Day> getOldDays(@Param("REFERENCE_DATE") LocalDate date);
+
+    @Query(nativeQuery = true)
+    List<Day> getLatestDate();
 }
