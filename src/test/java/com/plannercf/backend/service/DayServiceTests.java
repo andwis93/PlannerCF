@@ -78,4 +78,23 @@ public class DayServiceTests {
             throw new TestNotCleaned("createDaysTest NOT cleaned");
         }
     }
+
+    @Test
+    void getLatestDayTest() throws TestNotCleaned {
+        //Given
+        service.createDays(3, LocalDate.of(2023,12,24));
+
+        //When
+        List<Day> days = service.getLatestDay();
+
+        //Then
+        assertEquals(LocalDate.of(2023,12,26), days.get(0).getDate());
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("getLatestDayTest NOT cleaned");
+        }
+    }
 }
