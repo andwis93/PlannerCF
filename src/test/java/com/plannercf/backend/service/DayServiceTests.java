@@ -7,7 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,5 +56,26 @@ public class DayServiceTests {
         }
     }
 
+    @Test
+    void createDaysTest() throws TestNotCleaned {
+        //Given
+        service.createDay(LocalDate.of(2023,12,24));
+        service.createDay(LocalDate.of(2023,12,26));
 
+        //When
+        service.createDays(2, LocalDate.of(2023,12,24));
+        List<Day> days = service.getAllDays();
+
+        //Then
+        assertEquals(4, days.size());
+        assertEquals(LocalDate.of(2023,12,25), days.get(2).getDate());
+        assertEquals(LocalDate.of(2023,12,27), days.get(3).getDate());
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("createDaysTest NOT cleaned");
+        }
+    }
 }
