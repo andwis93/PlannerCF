@@ -1,6 +1,7 @@
 package com.plannercf.backend.service;
 
 import com.plannercf.backend.domain.Day;
+import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import com.plannercf.backend.service.exception.TestNotCleaned;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -96,5 +96,20 @@ public class DayServiceTests {
         } catch (Exception err) {
             throw new TestNotCleaned("getLatestDayTest NOT cleaned");
         }
+    }
+
+    @Test
+    void changeDayTest() throws RecordNotExistsException {
+        //Given
+        service.createDay(LocalDate.of(2023,12,24));
+
+        //When
+        Day day = service.getDayByDate(LocalDate.of(2023,12,24));
+        service.changeDay(new DayDto(day.getId(), day.getDate(), "MONDAY"));
+        Day changedDay = service.getDayByDate(LocalDate.of(2023,12,24));
+
+        //Then
+        assertEquals(day.getDayName(), "SUNDAY");
+        assertEquals(changedDay.getDayName(), "MONDAY");
     }
 }
