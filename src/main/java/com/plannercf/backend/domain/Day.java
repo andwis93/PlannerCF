@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @NamedQuery(
         name = "Day.getOldDays",
-        query = "FROM Day WHERE date < :REFERENCE_DATE"
+        query = "FROM Day WHERE date <= :REFERENCE_DATE"
 )
 
 @NamedNativeQuery(

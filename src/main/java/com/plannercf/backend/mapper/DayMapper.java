@@ -18,10 +18,6 @@ public class DayMapper {
         );
     }
 
-    public Day mapToDay(DayDto dayDto) {
-        return new Day(dayDto.getDate());
-    }
-
     public List<DayDto> mapToDtoList(List<Day> days) {
         return days.stream().map(this::mapToDayDto).collect(Collectors.toList());
     }

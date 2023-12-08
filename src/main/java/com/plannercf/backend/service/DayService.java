@@ -2,7 +2,6 @@ package com.plannercf.backend.service;
 
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
-import com.plannercf.backend.mapper.DayMapper;
 import com.plannercf.backend.repository.DayRepository;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,10 @@ import java.util.List;
 @Service
 public class DayService {
     private final DayRepository repository;
-    private final DayMapper mapper;
 
     @Autowired
-    public DayService(final DayRepository repository, final DayMapper mapper) {
+    public DayService(final DayRepository repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
     public boolean isDayExistByDate(LocalDate date) {

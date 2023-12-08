@@ -99,7 +99,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void changeDayTest() throws RecordNotExistsException {
+    void changeDayTest() throws RecordNotExistsException, TestNotCleaned {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
 
@@ -111,5 +111,57 @@ public class DayServiceTests {
         //Then
         assertEquals(day.getDayName(), "SUNDAY");
         assertEquals(changedDay.getDayName(), "MONDAY");
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("changeDayTest NOT cleaned");
+        }
     }
+
+    @Test
+    void deleteDayTest() throws TestNotCleaned {
+        //Given
+        service.createDay(LocalDate.of(2023,12,24));
+        service.createDay(LocalDate.of(2023,12,25));
+
+        //When
+        service.deleteDay(LocalDate.of(2023, 12, 24));
+        int daysNumber = service.getAllDays().size();
+
+        //Then
+        assertEquals(1, daysNumber);
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("deleteDayTest NOT cleaned");
+        }
+    }
+    @Test
+    void deleteOldDayTest() throws TestNotCleaned, RecordNotExistsException {
+        //Given
+        service.createDay(LocalDate.of(2023,12,24));
+        service.createDay(LocalDate.of(2023,12,25));
+        service.createDay(LocalDate.of(2023,12,26));
+        service.createDay(LocalDate.of(2023,12,27));
+
+
+        //When
+        service.deleteOldDays(LocalDate.of(2023, 12, 25));
+        int daysNumber = service.getAllDays().size();
+
+        //Then
+        assertEquals(2, daysNumber);
+
+        //Clean
+        try {
+            service.deleteAll();
+        } catch (Exception err) {
+            throw new TestNotCleaned("deleteDayTest NOT cleaned");
+        }
+    }
+
 }
