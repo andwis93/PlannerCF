@@ -59,13 +59,13 @@ public class DayServiceTests {
     }
 
     @Test
-    void saveDaysTest() throws TestNotCleaned, RecordAlreadyExistsException {
+    void createDaysTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.saveDay(LocalDate.of(2023,12,24));
         service.saveDay(LocalDate.of(2023,12,26));
 
         //When
-        service.saveDays(2, LocalDate.of(2023,12,24));
+        service.createDays(2, LocalDate.of(2023,12,24));
         List<Day> days = service.getAllDays();
 
         //Then
@@ -84,7 +84,7 @@ public class DayServiceTests {
     @Test
     void getLatestDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.saveDays(3, LocalDate.of(2023,12,24));
+        service.createDays(3, LocalDate.of(2023,12,24));
 
         //When
         List<Day> days = service.getLatestDay();

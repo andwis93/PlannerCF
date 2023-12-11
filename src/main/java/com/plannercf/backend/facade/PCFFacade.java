@@ -23,8 +23,8 @@ public class PCFFacade {
         return dayService.saveDay(date);
     }
 
-    public List<Day> saveDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
-      return dayService.saveDays(dayQty, startDate);
+    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+      return dayService.createDays(dayQty, startDate);
     }
 
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {

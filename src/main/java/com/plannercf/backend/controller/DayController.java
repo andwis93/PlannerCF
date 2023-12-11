@@ -33,8 +33,8 @@ public class DayController {
     }
 
     @PostMapping(path = "/many")
-    public ResponseEntity<List<DayDto>> saveDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
-        return ResponseEntity.ok(mapper.mapToDtoList(facade.saveDays(dayQty, startDate)));
+    public ResponseEntity<List<DayDto>> createDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
+        return ResponseEntity.ok(mapper.mapToDtoList(facade.createDays(dayQty, startDate)));
     }
 
     @GetMapping(value = "{date}")

@@ -61,7 +61,7 @@ public class DayControllerTests {
     }
 
     @Test
-    void shouldSaveDays() throws Exception {
+    void shouldCreateDays() throws Exception {
         //Given
         Day day2 = new Day(2L, LocalDate.of(2023,12,24));
         List<Day> days = new ArrayList<>();
@@ -73,7 +73,7 @@ public class DayControllerTests {
         daysDto.add(dayDto);
         daysDto.add(dayDto2);
 
-        when(facade.saveDays(2, LocalDate.of(2023,12,23))).thenReturn(days);
+        when(facade.createDays(2, LocalDate.of(2023,12,23))).thenReturn(days);
         when(mapper.mapToDtoList(days)).thenReturn(daysDto);
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())

@@ -34,7 +34,7 @@ public class DayService {
         }
     }
 
-    public List<Day> saveDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
         List<Day> days = new ArrayList<>();
         long dayCount = 0;
         while (days.size() < dayQty) {
