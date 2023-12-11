@@ -1,6 +1,7 @@
 package com.plannercf.backend.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,6 @@ import java.util.Objects;
                 "(SELECT date FROM days WHERE date = (SELECT MAX(date) FROM days))",
         resultClass = Day.class
 )
-
 @NoArgsConstructor
 @Getter
 @Setter
@@ -30,6 +30,12 @@ public class Day extends BaseEntity {
     private LocalDate date;
     @Column(name = "DAY_OF_THE_WEEK")
     private String dayName;
+
+    public Day(Long id, LocalDate date) {
+        super(id);
+        this.date = date;
+        this.dayName = date.getDayOfWeek().toString();
+    }
 
     public Day(LocalDate date) {
         this.date = date;

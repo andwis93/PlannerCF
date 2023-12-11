@@ -3,11 +3,13 @@ package com.plannercf.backend.service;
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.repository.DayRepository;
+import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,25 +25,26 @@ public class DayService {
         return repository.existsDayByDate(date);
     }
 
-    public boolean createDay(LocalDate date) {
+    public Day createDay(LocalDate date) throws RecordAlreadyExistsException {
         if (!isDayExistByDate(date)) {
-            repository.save(new Day(date));
-            return true;
+         Day day = repository.save(new Day(date));
+            return day;
         } else {
-            return false;
+            throw new RecordAlreadyExistsException("DayService.class -> createDay: Day with date: " + date + " already exists!");
         }
     }
 
-    public void createDays(int dayQty, LocalDate startDate) {
-        int counter = 0;
-        long days = 0;
-        while (counter < dayQty) {
-           LocalDate date = startDate.plusDays(days);
-            if (createDay(date)) {
-                counter++;
+    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+        List<Day> days = new ArrayList<>();
+        long dayCount = 0;
+        while (days.size() < dayQty) {
+           LocalDate date = startDate.plusDays(dayCount);
+            if (!isDayExistByDate(date)) {
+                days.add(createDay(date));
             }
-            days++;
+            dayCount++;
         }
+        return days;
     }
 
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {

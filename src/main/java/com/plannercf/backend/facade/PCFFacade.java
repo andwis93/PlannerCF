@@ -3,6 +3,7 @@ package com.plannercf.backend.facade;
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.service.DayService;
+import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,12 @@ public class PCFFacade {
         this.dayService = dayService;
     }
 
-    public boolean createDay(LocalDate date) {
+    public Day createDay(LocalDate date) throws RecordAlreadyExistsException {
         return dayService.createDay(date);
     }
 
-    public void createDays(int dayQty, LocalDate startDate) {
-        dayService.createDays(dayQty, startDate);
+    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+      return dayService.createDays(dayQty, startDate);
     }
 
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {

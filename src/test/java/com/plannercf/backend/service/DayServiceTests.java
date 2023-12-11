@@ -2,6 +2,7 @@ package com.plannercf.backend.service;
 
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
+import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import com.plannercf.backend.service.exception.TestNotCleaned;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
@@ -22,7 +24,7 @@ public class DayServiceTests {
     private DayService service;
 
     @Test
-    void isDayExistsByDateTest() throws TestNotCleaned {
+    void isDayExistsByDateTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given & When
         service.createDay(LocalDate.of(2023,12,24));
 
@@ -38,7 +40,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void createDayTest() throws RecordNotExistsException, TestNotCleaned {
+    void createDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
 
@@ -57,7 +59,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void createDaysTest() throws TestNotCleaned {
+    void createDaysTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
         service.createDay(LocalDate.of(2023,12,26));
@@ -80,7 +82,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void getLatestDayTest() throws TestNotCleaned {
+    void getLatestDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.createDays(3, LocalDate.of(2023,12,24));
 
@@ -99,7 +101,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void changeDayTest() throws RecordNotExistsException, TestNotCleaned {
+    void changeDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
 
@@ -121,7 +123,7 @@ public class DayServiceTests {
     }
 
     @Test
-    void deleteDayTest() throws TestNotCleaned {
+    void deleteDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
         service.createDay(LocalDate.of(2023,12,25));
@@ -141,7 +143,7 @@ public class DayServiceTests {
         }
     }
     @Test
-    void deleteOldDayTest() throws TestNotCleaned, RecordNotExistsException {
+    void deleteOldDayTest() throws TestNotCleaned, RecordNotExistsException, RecordAlreadyExistsException {
         //Given
         service.createDay(LocalDate.of(2023,12,24));
         service.createDay(LocalDate.of(2023,12,25));
@@ -163,5 +165,4 @@ public class DayServiceTests {
             throw new TestNotCleaned("deleteDayTest NOT cleaned");
         }
     }
-
 }
