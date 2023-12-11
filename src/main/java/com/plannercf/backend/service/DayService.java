@@ -1,15 +1,14 @@
 package com.plannercf.backend.service;
 
 import com.plannercf.backend.domain.Day;
-import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.repository.DayRepository;
 import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -57,7 +56,9 @@ public class DayService {
     }
 
     public List<Day> getAllDays() {
-        return repository.findAll();
+        List<Day> days = repository.findAll();
+        days.sort(Comparator.comparing(Day::getDate));
+        return days;
     }
 
     public List<Day> getLatestDay() {

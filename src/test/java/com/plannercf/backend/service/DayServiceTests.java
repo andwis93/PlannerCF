@@ -67,7 +67,7 @@ public class DayServiceTests {
 
         //Then
         assertEquals(4, days.size());
-        assertEquals(LocalDate.of(2023,12,25), days.get(2).getDate());
+        assertEquals(LocalDate.of(2023,12,25), days.get(1).getDate());
         assertEquals(LocalDate.of(2023,12,27), days.get(3).getDate());
 
         //Clean

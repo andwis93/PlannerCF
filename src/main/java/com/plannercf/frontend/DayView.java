@@ -1,21 +1,30 @@
 package com.plannercf.frontend;
 
 import com.plannercf.backend.domain.Day;
+import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.frontend.style.StyleMgn;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @PageTitle("Day | PlannerCF")
 @Route(value = "")
 public class DayView extends VerticalLayout {
 
-    public DayView() {
-    setSizeFull();
-    
-    getDayBarGenerator();
+    private final PCFFacade facade;
+    private final StyleMgn styleMgn;
+
+    @Autowired
+    public DayView(PCFFacade facade, StyleMgn styleMgn) {
+        this.facade = facade;
+        this.styleMgn = styleMgn;
+        setSizeFull();
+
+        getDayBarGenerator();
     }
 
     private void dayBar(String name, String date, String color) {
@@ -38,9 +47,9 @@ public class DayView extends VerticalLayout {
     }
 
     private void getDayBarGenerator() {
-        List<Day> days = new ArrayList<>();
+        List<Day> days = facade.getAllDays();
         for(Day day: days) {
-            dayBar(day.getDayName(), day.getDate().toString(), "color");
+            dayBar(day.getDayName(),day.getDate().toString(), styleMgn.getDaysColor().get(day.getDayName()));
         }
     }
 }

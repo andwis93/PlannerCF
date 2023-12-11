@@ -1,12 +1,12 @@
 package com.plannercf.backend.facade;
 
 import com.plannercf.backend.domain.Day;
-import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.service.DayService;
 import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,7 +32,8 @@ public class PCFFacade {
     }
 
     public List<Day> getAllDays() {
-        return dayService.getAllDays();
+        List<Day> days = dayService.getAllDays();
+        return days ;
     }
 
     public List<Day> getLatestDay() {

@@ -1,11 +1,9 @@
 package com.plannercf.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,8 +14,8 @@ import java.util.Objects;
 
 @NamedNativeQuery(
         name = "Day.getLatestDate",
-        query = "SELECT * FROM days WHERE date IN " +
-                "(SELECT date FROM days WHERE date = (SELECT MAX(date) FROM days))",
+        query = "SELECT * FROM days WHERE date IN" +
+                "(SELECT MAX(date) FROM days WHERE date IN(SELECT MAX(date) from days))",
         resultClass = Day.class
 )
 @NoArgsConstructor
