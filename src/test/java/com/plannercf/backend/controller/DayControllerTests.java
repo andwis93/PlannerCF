@@ -137,21 +137,27 @@ public class DayControllerTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
+    }
 
+    @Test
+    void shouldGetLatestDay() throws Exception {
+        //Given
+        List<Day> days = new ArrayList<>();
+        days.add(day);
 
+        List<DayDto> daysDto = new ArrayList<>();
+        daysDto.add(dayDto);
 
+        when(facade.getLatestDay()).thenReturn(days);
+        when(mapper.mapToDtoList(days)).thenReturn(daysDto);
 
-
-
-
-
-
-
-
-
-
-
-
-
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/plannercf/day/latest")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-23")));
     }
 }
