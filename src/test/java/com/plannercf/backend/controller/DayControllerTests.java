@@ -170,4 +170,38 @@ public class DayControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-23")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].dayName", Matchers.is("SATURDAY")));
     }
+
+    @Test
+    void shouldDeleteDay() throws Exception {
+        //Given
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/plannercf/day/2023-12-23")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void shouldDeleteOldDays() throws Exception {
+        //Given
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/plannercf/day/old/2023-12-24")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void shouldDeleteAllDays() throws Exception {
+        //Given
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/plannercf/day/all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }

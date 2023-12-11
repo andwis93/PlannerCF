@@ -65,7 +65,7 @@ public class DayController {
     }
 
     @DeleteMapping(path = "/all")
-    public ResponseEntity<Void> deleteAllDay() {
+    public ResponseEntity<Void> deleteAllDays() {
         facade.deleteAll();
         return ResponseEntity.ok().build();
     }

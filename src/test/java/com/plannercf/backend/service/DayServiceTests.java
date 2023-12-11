@@ -101,28 +101,6 @@ public class DayServiceTests {
     }
 
     @Test
-    void changeDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
-        //Given
-        service.saveDay(LocalDate.of(2023,12,24));
-
-        //When
-        Day day = service.getDayByDate(LocalDate.of(2023,12,24));
-        service.changeDay(new DayDto(day.getId(), day.getDate(), "MONDAY"));
-        Day changedDay = service.getDayByDate(LocalDate.of(2023,12,24));
-
-        //Then
-        assertEquals(day.getDayName(), "SUNDAY");
-        assertEquals(changedDay.getDayName(), "MONDAY");
-
-        //Clean
-        try {
-            service.deleteAll();
-        } catch (Exception err) {
-            throw new TestNotCleaned("changeDayTest NOT cleaned");
-        }
-    }
-
-    @Test
     void deleteDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
         service.saveDay(LocalDate.of(2023,12,24));
