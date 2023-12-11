@@ -54,8 +54,7 @@ public class DayController {
 
     @PutMapping(path = "/change")
     public ResponseEntity<DayDto> updateDay(@RequestBody DayDto dayDto) throws RecordNotExistsException{
-        facade.changeDay(dayDto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(mapper.mapToDayDto(facade.changeDay(dayDto)));
     }
 
     @DeleteMapping(value = "{date}")

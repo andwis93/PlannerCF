@@ -64,11 +64,11 @@ public class DayService {
         return repository.getLatestDate();
     }
 
-    public void changeDay(DayDto dayDto) throws RecordNotExistsException {
+    public Day changeDay(DayDto dayDto) throws RecordNotExistsException {
         if (isDayExistByDate(dayDto.getDate())) {
             Day day = getDayByDate(dayDto.getDate());
             day.setDayName(dayDto.getDayName());
-            repository.save(day);
+          return repository.save(day);
         } else {
             throw new RecordNotExistsException();
         }
