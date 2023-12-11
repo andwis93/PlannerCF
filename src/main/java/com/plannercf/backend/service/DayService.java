@@ -25,7 +25,7 @@ public class DayService {
         return repository.existsDayByDate(date);
     }
 
-    public Day createDay(LocalDate date) throws RecordAlreadyExistsException {
+    public Day saveDay(LocalDate date) throws RecordAlreadyExistsException {
         if (!isDayExistByDate(date)) {
          Day day = repository.save(new Day(date));
             return day;
@@ -34,13 +34,13 @@ public class DayService {
         }
     }
 
-    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+    public List<Day> saveDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
         List<Day> days = new ArrayList<>();
         long dayCount = 0;
         while (days.size() < dayQty) {
            LocalDate date = startDate.plusDays(dayCount);
             if (!isDayExistByDate(date)) {
-                days.add(createDay(date));
+                days.add(saveDay(date));
             }
             dayCount++;
         }

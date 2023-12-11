@@ -26,7 +26,7 @@ public class DayServiceTests {
     @Test
     void isDayExistsByDateTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given & When
-        service.createDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,24));
 
         //Then
         assertTrue(service.isDayExistByDate(LocalDate.of(2023,12,24)));
@@ -40,9 +40,9 @@ public class DayServiceTests {
     }
 
     @Test
-    void createDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
+    void saveDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.createDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,24));
 
         //When
         Day dayRetrieved = service.getDayByDate(LocalDate.parse("2023-12-24"));
@@ -59,13 +59,13 @@ public class DayServiceTests {
     }
 
     @Test
-    void createDaysTest() throws TestNotCleaned, RecordAlreadyExistsException {
+    void saveDaysTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.createDay(LocalDate.of(2023,12,24));
-        service.createDay(LocalDate.of(2023,12,26));
+        service.saveDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,26));
 
         //When
-        service.createDays(2, LocalDate.of(2023,12,24));
+        service.saveDays(2, LocalDate.of(2023,12,24));
         List<Day> days = service.getAllDays();
 
         //Then
@@ -84,7 +84,7 @@ public class DayServiceTests {
     @Test
     void getLatestDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.createDays(3, LocalDate.of(2023,12,24));
+        service.saveDays(3, LocalDate.of(2023,12,24));
 
         //When
         List<Day> days = service.getLatestDay();
@@ -103,7 +103,7 @@ public class DayServiceTests {
     @Test
     void changeDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.createDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,24));
 
         //When
         Day day = service.getDayByDate(LocalDate.of(2023,12,24));
@@ -125,8 +125,8 @@ public class DayServiceTests {
     @Test
     void deleteDayTest() throws TestNotCleaned, RecordAlreadyExistsException {
         //Given
-        service.createDay(LocalDate.of(2023,12,24));
-        service.createDay(LocalDate.of(2023,12,25));
+        service.saveDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,25));
 
         //When
         service.deleteDay(LocalDate.of(2023, 12, 24));
@@ -145,10 +145,10 @@ public class DayServiceTests {
     @Test
     void deleteOldDayTest() throws TestNotCleaned, RecordNotExistsException, RecordAlreadyExistsException {
         //Given
-        service.createDay(LocalDate.of(2023,12,24));
-        service.createDay(LocalDate.of(2023,12,25));
-        service.createDay(LocalDate.of(2023,12,26));
-        service.createDay(LocalDate.of(2023,12,27));
+        service.saveDay(LocalDate.of(2023,12,24));
+        service.saveDay(LocalDate.of(2023,12,25));
+        service.saveDay(LocalDate.of(2023,12,26));
+        service.saveDay(LocalDate.of(2023,12,27));
 
 
         //When

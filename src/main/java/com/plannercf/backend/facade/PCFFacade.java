@@ -19,12 +19,12 @@ public class PCFFacade {
         this.dayService = dayService;
     }
 
-    public Day createDay(LocalDate date) throws RecordAlreadyExistsException {
-        return dayService.createDay(date);
+    public Day saveDay(LocalDate date) throws RecordAlreadyExistsException {
+        return dayService.saveDay(date);
     }
 
-    public List<Day> createDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
-      return dayService.createDays(dayQty, startDate);
+    public List<Day> saveDays(int dayQty, LocalDate startDate) throws RecordAlreadyExistsException {
+      return dayService.saveDays(dayQty, startDate);
     }
 
     public Day getDayByDate(LocalDate date) throws RecordNotExistsException {

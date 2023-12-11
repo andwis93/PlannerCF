@@ -7,7 +7,6 @@ import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +28,14 @@ public class DayController {
     }
 
     @PostMapping(path = "/one/{date}")
-    public ResponseEntity<DayDto> createDay(@PathVariable("date")LocalDate date) throws RecordAlreadyExistsException {
-        return ResponseEntity.ok(mapper.mapToDayDto(facade.createDay(date)));
+    public ResponseEntity<DayDto> saveDay(@PathVariable("date")LocalDate date) throws RecordAlreadyExistsException {
+        return ResponseEntity.ok(mapper.mapToDayDto(facade.saveDay(date)));
     }
 
     @PostMapping(path = "/many")
-    public ResponseEntity<List<DayDto>> createDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
-        facade.createDays(dayQty, startDate);
-        return ResponseEntity.ok(mapper.mapToDtoList(facade.createDays(dayQty, startDate)));
+    public ResponseEntity<List<DayDto>> saveDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
+        facade.saveDays(dayQty, startDate);
+        return ResponseEntity.ok(mapper.mapToDtoList(facade.saveDays(dayQty, startDate)));
     }
 
     @GetMapping(value = "{date}")
