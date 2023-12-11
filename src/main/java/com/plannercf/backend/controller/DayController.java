@@ -34,7 +34,6 @@ public class DayController {
 
     @PostMapping(path = "/many")
     public ResponseEntity<List<DayDto>> saveDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
-        facade.saveDays(dayQty, startDate);
         return ResponseEntity.ok(mapper.mapToDtoList(facade.saveDays(dayQty, startDate)));
     }
 

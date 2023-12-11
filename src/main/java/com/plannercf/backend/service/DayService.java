@@ -40,7 +40,8 @@ public class DayService {
         while (days.size() < dayQty) {
            LocalDate date = startDate.plusDays(dayCount);
             if (!isDayExistByDate(date)) {
-                days.add(saveDay(date));
+                Day day = saveDay(date);
+                days.add(day);
             }
             dayCount++;
         }

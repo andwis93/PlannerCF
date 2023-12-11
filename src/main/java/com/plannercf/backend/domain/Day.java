@@ -47,7 +47,7 @@ public class Day extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Day day = (Day) o;
-        return Objects.equals(date, day.date) && Objects.equals(dayName, day.dayName);
+        return Objects.equals(date, day.date);
     }
 
     @Override
