@@ -7,6 +7,8 @@ import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.facade.PCFFacade;
 import com.plannercf.backend.mapper.DayMapper;
+import com.plannercf.backend.repository.DayRepository;
+import com.plannercf.backend.service.DayService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
@@ -33,6 +37,10 @@ public class DayControllerTests {
     private PCFFacade facade;
     @MockBean
     private DayMapper mapper;
+    @MockBean
+    private DayService service;
+    @MockBean
+    private DayRepository repository;
 
     Day day = new Day(1L, LocalDate.of(2023,12,23));
     DayDto dayDto = new DayDto(1L, LocalDate.of(2023,12,23), "SATURDAY");
@@ -158,6 +166,8 @@ public class DayControllerTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-23")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-23")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dayName", Matchers.is("SATURDAY")));
     }
 }

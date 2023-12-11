@@ -39,10 +39,6 @@ public class PCFFacade {
         return dayService.getLatestDay();
     }
 
-    public Day changeDay(DayDto dayDto) throws RecordNotExistsException {
-      return dayService.changeDay(dayDto);
-    }
-
     public void deleteDay(LocalDate date) {
         dayService.deleteDay(date);
     }
