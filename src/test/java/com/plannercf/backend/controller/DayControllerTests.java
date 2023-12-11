@@ -91,6 +91,7 @@ public class DayControllerTests {
                         .contentType(jsonContent))
                 .andExpect((MockMvcResultMatchers.status().isOk()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].id", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].date", Matchers.is("2023-12-24")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].dayName", Matchers.is("SUNDAY")));
     }
@@ -111,5 +112,46 @@ public class DayControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.date", Matchers.is("2023-12-23")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.dayName", Matchers.is("SATURDAY")));
+    }
+
+    @Test
+    void shouldGetAllDays() throws Exception {
+        //Given
+        Day day2 = new Day(2L, LocalDate.of(2023,12,24));
+        List<Day> days = new ArrayList<>();
+        days.add(day);
+        days.add(day2);
+
+        DayDto dayDto2 = new DayDto(2L, LocalDate.of(2023,12,24), "SUNDAY");
+        List<DayDto> daysDto = new ArrayList<>();
+        daysDto.add(dayDto);
+        daysDto.add(dayDto2);
+
+        when(facade.getAllDays()).thenReturn(days);
+        when(mapper.mapToDtoList(days)).thenReturn(daysDto);
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/plannercf/day/all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
