@@ -94,4 +94,22 @@ public class DayControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].date", Matchers.is("2023-12-24")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].dayName", Matchers.is("SUNDAY")));
     }
+
+    @Test
+    void shouldGetDay() throws Exception {
+        //Given
+        when(facade.getDayByDate(LocalDate.of(2023,12,23))).thenReturn(day);
+        when(mapper.mapToDayDto(day)).thenReturn(dayDto);
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/plannercf/day/2023-12-23")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.date", Matchers.is("2023-12-23")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.dayName", Matchers.is("SATURDAY")));
+    }
 }
