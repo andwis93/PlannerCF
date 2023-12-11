@@ -7,8 +7,6 @@ import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
 import com.plannercf.backend.facade.PCFFacade;
 import com.plannercf.backend.mapper.DayMapper;
-import com.plannercf.backend.repository.DayRepository;
-import com.plannercf.backend.service.DayService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +22,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
@@ -37,10 +34,6 @@ public class DayControllerTests {
     private PCFFacade facade;
     @MockBean
     private DayMapper mapper;
-    @MockBean
-    private DayService service;
-    @MockBean
-    private DayRepository repository;
 
     Day day = new Day(1L, LocalDate.of(2023,12,23));
     DayDto dayDto = new DayDto(1L, LocalDate.of(2023,12,23), "SATURDAY");
