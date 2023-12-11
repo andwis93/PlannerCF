@@ -2,7 +2,7 @@ package com.plannercf.frontend;
 
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.facade.PCFFacade;
-import com.plannercf.frontend.style.StyleMgn;
+import com.plannercf.frontend.style.StyleMgr;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -16,12 +16,12 @@ import java.util.List;
 public class DayView extends VerticalLayout {
 
     private final PCFFacade facade;
-    private final StyleMgn styleMgn;
+    private final StyleMgr styleMgr;
 
     @Autowired
-    public DayView(PCFFacade facade, StyleMgn styleMgn) {
+    public DayView(PCFFacade facade, StyleMgr styleMgn) {
         this.facade = facade;
-        this.styleMgn = styleMgn;
+        this.styleMgr = styleMgn;
         setSizeFull();
 
         getDayBarGenerator();
@@ -49,7 +49,7 @@ public class DayView extends VerticalLayout {
     private void getDayBarGenerator() {
         List<Day> days = facade.getAllDays();
         for(Day day: days) {
-            dayBar(day.getDayName(),day.getDate().toString(), styleMgn.getDaysColor().get(day.getDayName()));
+            dayBar(day.getDayName(),day.getDate().toString(), styleMgr.getDaysColor().get(day.getDayName()));
         }
     }
 }

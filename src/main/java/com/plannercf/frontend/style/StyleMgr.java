@@ -7,10 +7,10 @@ import java.util.Map;
 
 @Getter
 @Service
-public class StyleMng {
+public class StyleMgr {
     private final Map<String, String> daysColor;
 
-    public StyleMng() {
+    public StyleMgr() {
         this.daysColor = new HashMap<>();
         daysColor.put("MONDAY", Color.MONDAY.getColor());
         daysColor.put("TUESDAY", Color.TUESDAY.getColor());
