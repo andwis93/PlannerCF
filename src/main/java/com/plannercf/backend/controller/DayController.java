@@ -34,7 +34,7 @@ public class DayController {
 
     @PostMapping(path = "/many")
     public ResponseEntity<List<DayDto>> createDays(@RequestParam int dayQty, @RequestParam LocalDate startDate) throws RecordAlreadyExistsException {
-        return ResponseEntity.ok(mapper.mapToDtoList(facade.createDays(dayQty, startDate)));
+        return ResponseEntity.ok(mapper.mapToDayDtoList(facade.createDays(dayQty, startDate)));
     }
 
     @GetMapping(value = "{date}")
@@ -44,12 +44,12 @@ public class DayController {
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<DayDto>> getAllDays() {
-        return ResponseEntity.ok(mapper.mapToDtoList(facade.getAllDays()));
+        return ResponseEntity.ok(mapper.mapToDayDtoList(facade.getAllDays()));
     }
 
     @GetMapping(path = "/latest")
     public ResponseEntity<List<DayDto>> getLatestDay() {
-        return ResponseEntity.ok(mapper.mapToDtoList(facade.getLatestDay()));
+        return ResponseEntity.ok(mapper.mapToDayDtoList(facade.getLatestDay()));
     }
 
     @DeleteMapping(value = "{date}")

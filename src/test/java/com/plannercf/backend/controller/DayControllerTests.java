@@ -75,7 +75,7 @@ public class DayControllerTests {
         daysDto.add(dayDto2);
 
         when(facade.createDays(2, LocalDate.of(2023,12,23))).thenReturn(days);
-        when(mapper.mapToDtoList(days)).thenReturn(daysDto);
+        when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
@@ -129,7 +129,7 @@ public class DayControllerTests {
         daysDto.add(dayDto2);
 
         when(facade.getAllDays()).thenReturn(days);
-        when(mapper.mapToDtoList(days)).thenReturn(daysDto);
+        when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
 
         //When & Then
         mockMvc
@@ -150,7 +150,7 @@ public class DayControllerTests {
         daysDto.add(dayDto);
 
         when(facade.getLatestDay()).thenReturn(days);
-        when(mapper.mapToDtoList(days)).thenReturn(daysDto);
+        when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
 
         //When & Then
         mockMvc

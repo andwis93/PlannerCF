@@ -18,7 +18,7 @@ public class DayMapper {
         );
     }
 
-    public List<DayDto> mapToDtoList(List<Day> days) {
+    public List<DayDto> mapToDayDtoList(List<Day> days) {
         return days.stream().map(this::mapToDayDto).collect(Collectors.toList());
     }
 }

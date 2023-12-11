@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,4 +29,17 @@ public class DayMapperTests {
         //Then
         assertEquals(LocalDate.of(2023,12,23), dayDto.getDate());
     }
+    @Test
+    void mapToDayDtoListTest() {
+        //Given
+        List<Day> days = List.of(new Day(LocalDate.of(2023,12,23)),
+                new Day(LocalDate.of(2023,12,24)));
+
+        //When
+        List<DayDto> daysDto = mapper.mapToDayDtoList(days);
+
+        //Then
+        assertEquals(2, daysDto.size());
+    }
+
 }
