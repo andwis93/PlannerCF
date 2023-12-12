@@ -38,7 +38,7 @@ public class CategoryController {
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(mapper.mapToListCategoryDto(facade.getAllCategories()));
     }
 
     @PutMapping(value = "{id}")

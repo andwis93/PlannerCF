@@ -6,6 +6,8 @@ import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
     private final CategoryRepository repository;
@@ -21,6 +23,10 @@ public class CategoryService {
 
     public Category getCategory(Long id) throws RecordNotExistsException {
         return repository.findById(id).orElseThrow(RecordNotExistsException::new);
+    }
+
+    public List<Category> getAllCategory() {
+        return repository.findAll();
     }
 
 }
