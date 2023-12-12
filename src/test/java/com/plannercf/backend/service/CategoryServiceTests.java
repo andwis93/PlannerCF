@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DisplayName("CategoryTests.class Test Suite")
-public class CategoryTests {
+public class CategoryServiceTests {
     @Autowired
     private CategoryService service;
 
