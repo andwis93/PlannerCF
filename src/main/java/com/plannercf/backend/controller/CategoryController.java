@@ -1,8 +1,10 @@
 package com.plannercf.backend.controller;
 
-import com.plannercf.backend.domain.Category;
 import com.plannercf.backend.domain.CategoryDto;
-import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.backend.facade.CategoryFacade;
+import com.plannercf.backend.facade.DayFacade;
+import com.plannercf.backend.mapper.CategoryMapper;
+import com.plannercf.backend.service.exception.RecordNotExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,21 +17,23 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class CategoryController {
-    private PCFFacade facade;
+    private CategoryFacade facade;
+    private CategoryMapper mapper;
 
     @Autowired
-    public CategoryController(PCFFacade facade) {
+    public CategoryController(CategoryFacade facade, CategoryMapper mapper) {
         this.facade = facade;
+        this.mapper = mapper;
     }
 
     @PostMapping(value = "{name}")
     public ResponseEntity<CategoryDto> saveCategory(@PathVariable("name") String name) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(mapper.mapToCategoryDto(facade.saveCategory(name)));
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<CategoryDto> getCategory(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<CategoryDto> getCategory(@PathVariable("id") Long id) throws RecordNotExistsException {
+        return ResponseEntity.ok(mapper.mapToCategoryDto(facade.getCategory(id)));
     }
 
     @GetMapping(path = "/all")

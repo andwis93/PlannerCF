@@ -1,7 +1,7 @@
 package com.plannercf.frontend;
 
 import com.plannercf.backend.domain.Day;
-import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.backend.facade.DayFacade;
 import com.plannercf.frontend.style.StyleMgr;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,11 +15,11 @@ import java.util.List;
 @Route(value = "")
 public class DayView extends VerticalLayout {
 
-    private final PCFFacade facade;
+    private final DayFacade facade;
     private final StyleMgr styleMgr;
 
     @Autowired
-    public DayView(PCFFacade facade, StyleMgr styleMgn) {
+    public DayView(DayFacade facade, StyleMgr styleMgn) {
         this.facade = facade;
         this.styleMgr = styleMgn;
         setSizeFull();

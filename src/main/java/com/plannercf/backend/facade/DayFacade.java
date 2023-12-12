@@ -11,11 +11,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class PCFFacade {
+public class DayFacade {
     private final DayService dayService;
 
     @Autowired
-    public PCFFacade(final DayService dayService) {
+    public DayFacade(final DayService dayService) {
         this.dayService = dayService;
     }
 

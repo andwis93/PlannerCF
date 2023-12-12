@@ -1,7 +1,7 @@
 package com.plannercf.backend.controller;
 
 import com.plannercf.backend.domain.DayDto;
-import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.backend.facade.DayFacade;
 import com.plannercf.backend.mapper.DayMapper;
 import com.plannercf.backend.service.exception.RecordAlreadyExistsException;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
@@ -18,11 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class DayController {
-    private PCFFacade facade;
+    private DayFacade facade;
     private DayMapper mapper;
 
     @Autowired
-    public DayController(PCFFacade facade, DayMapper mapper) {
+    public DayController(DayFacade facade, DayMapper mapper) {
         this.facade = facade;
         this.mapper = mapper;
     }
