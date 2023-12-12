@@ -33,7 +33,7 @@ public class CategoryService {
         return repository.findById(id).orElseThrow(RecordNotExistsException::new);
     }
 
-    public List<Category> getAllCategory() {
+    public List<Category> getAllCategories() {
         return repository.findAll();
     }
 

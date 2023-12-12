@@ -57,5 +57,4 @@ public class CategoryController {
         facade.deleteAllCategories();
         return ResponseEntity.ok().build();
     }
-
 }

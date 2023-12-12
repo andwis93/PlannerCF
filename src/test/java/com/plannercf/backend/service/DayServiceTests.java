@@ -38,10 +38,8 @@ public class DayServiceTests {
 
     @Test
     void saveDayTest() throws RecordNotExistsException, TestNotCleaned, RecordAlreadyExistsException {
-        //Given
+        //Given & When
         service.saveDay(LocalDate.of(2023,12,24));
-
-        //When
         Day dayRetrieved = service.getDayByDate(LocalDate.parse("2023-12-24"));
 
         //Then
@@ -51,7 +49,7 @@ public class DayServiceTests {
         try {
             service.deleteAll();
         } catch (Exception err) {
-            throw new TestNotCleaned("createDayTest NOT cleaned");
+            throw new TestNotCleaned("saveDayTest NOT cleaned");
         }
     }
 

@@ -27,7 +27,7 @@ public class CategoryFacade {
     }
 
     public List<Category> getAllCategories() {
-        return service.getAllCategory();
+        return service.getAllCategories();
     }
 
     public Category updateCategory(Long id, CategoryDto categoryDto) throws RecordNotExistsException {
