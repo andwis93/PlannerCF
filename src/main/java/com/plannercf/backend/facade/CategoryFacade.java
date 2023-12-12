@@ -1,6 +1,7 @@
 package com.plannercf.backend.facade;
 
 import com.plannercf.backend.domain.Category;
+import com.plannercf.backend.domain.CategoryDto;
 import com.plannercf.backend.service.CategoryService;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class CategoryFacade {
 
     public List<Category> getAllCategories() {
         return service.getAllCategory();
+    }
+
+    public Category updateCategory(Long id, CategoryDto categoryDto) throws RecordNotExistsException {
+        return service.updateCategory(id, categoryDto);
     }
 }

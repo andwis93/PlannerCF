@@ -17,6 +17,11 @@ public class CategoryMapper {
         );
     }
 
+    public Category mapToCategory(Category category, CategoryDto categoryDto) {
+        category.setName(categoryDto.getName());
+        return category;
+    }
+
     public List<CategoryDto> mapToListCategoryDto(List<Category> categories) {
         return categories.stream().map(this::mapToCategoryDto).collect(Collectors.toList());
     }

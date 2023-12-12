@@ -17,4 +17,6 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
     Optional<Category> findById(@NotNull Long id);
     @NotNull
     List<Category> findAll();
+
+    boolean existsById(@NotNull Long id);
 }

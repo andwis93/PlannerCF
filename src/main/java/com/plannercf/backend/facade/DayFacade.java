@@ -32,8 +32,7 @@ public class DayFacade {
     }
 
     public List<Day> getAllDays() {
-        List<Day> days = dayService.getAllDays();
-        return days ;
+        return dayService.getAllDays();
     }
 
     public List<Day> getLatestDay() {

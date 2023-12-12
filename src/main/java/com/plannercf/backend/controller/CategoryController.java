@@ -2,7 +2,6 @@ package com.plannercf.backend.controller;
 
 import com.plannercf.backend.domain.CategoryDto;
 import com.plannercf.backend.facade.CategoryFacade;
-import com.plannercf.backend.facade.DayFacade;
 import com.plannercf.backend.mapper.CategoryMapper;
 import com.plannercf.backend.service.exception.RecordNotExistsException;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +41,9 @@ public class CategoryController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id,
+                                                      @RequestBody CategoryDto categoryDto) throws RecordNotExistsException {
+        return ResponseEntity.ok(mapper.mapToCategoryDto(facade.updateCategory(id, categoryDto)));
     }
 
     @DeleteMapping(value = "{id}")
