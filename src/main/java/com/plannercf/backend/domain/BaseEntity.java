@@ -17,7 +17,7 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    public BaseEntity(Long id) {
+    public BaseEntity(@Nullable Long id) {
         this.id = id;
     }
 
