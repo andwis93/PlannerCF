@@ -48,11 +48,13 @@ public class CategoryController {
 
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
+        facade.deleteCategory(id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<Void> deleteAllCategories() {
+        facade.deleteAllCategories();
         return ResponseEntity.ok().build();
     }
 

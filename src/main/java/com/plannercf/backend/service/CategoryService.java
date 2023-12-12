@@ -45,4 +45,12 @@ public class CategoryService {
             throw new RecordNotExistsException();
         }
     }
+
+    public void deleteCategory(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void deleteAllCategories() {
+        repository.deleteAll();
+    }
 }

@@ -33,4 +33,12 @@ public class CategoryFacade {
     public Category updateCategory(Long id, CategoryDto categoryDto) throws RecordNotExistsException {
         return service.updateCategory(id, categoryDto);
     }
+
+    public void deleteCategory(Long id) {
+        service.deleteCategory(id);
+    }
+
+    public void deleteAllCategories() {
+        service.deleteAllCategories();
+    }
 }
