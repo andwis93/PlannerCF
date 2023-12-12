@@ -41,5 +41,4 @@ public class DayMapperTests {
         //Then
         assertEquals(2, daysDto.size());
     }
-
 }
