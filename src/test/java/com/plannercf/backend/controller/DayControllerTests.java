@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.plannercf.backend.controller.adapter.LocalDateTypeAdapter;
 import com.plannercf.backend.domain.Day;
 import com.plannercf.backend.domain.DayDto;
-import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.backend.facade.DayFacade;
 import com.plannercf.backend.mapper.DayMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +31,7 @@ public class DayControllerTests {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private PCFFacade facade;
+    private DayFacade facade;
     @MockBean
     private DayMapper mapper;
 

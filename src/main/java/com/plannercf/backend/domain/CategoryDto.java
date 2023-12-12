@@ -12,7 +12,6 @@ public class CategoryDto extends BaseEntityDto{
         super(id);
         this.name = name;
     }
-
     public CategoryDto(String name) {
         this.name = name;
     }

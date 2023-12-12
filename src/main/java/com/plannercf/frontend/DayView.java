@@ -1,9 +1,13 @@
 package com.plannercf.frontend;
 
+import com.plannercf.backend.domain.Category;
 import com.plannercf.backend.domain.Day;
-import com.plannercf.backend.facade.PCFFacade;
+import com.plannercf.backend.facade.CategoryFacade;
+import com.plannercf.backend.facade.DayFacade;
 import com.plannercf.frontend.style.StyleMgr;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.NativeLabel;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -15,12 +19,14 @@ import java.util.List;
 @Route(value = "")
 public class DayView extends VerticalLayout {
 
-    private final PCFFacade facade;
+    private final DayFacade dayFacade;
+    private final CategoryFacade categoryFacade;
     private final StyleMgr styleMgr;
 
     @Autowired
-    public DayView(PCFFacade facade, StyleMgr styleMgn) {
-        this.facade = facade;
+    public DayView(DayFacade facade, CategoryFacade categoryFacade, StyleMgr styleMgn) {
+        this.dayFacade = facade;
+        this.categoryFacade = categoryFacade;
         this.styleMgr = styleMgn;
         setSizeFull();
 
@@ -41,13 +47,13 @@ public class DayView extends VerticalLayout {
         vlDay.setSpacing(false);
         vlDay.setAlignItems(Alignment.CENTER);
 
-        VerticalLayout vlGroups = new VerticalLayout();
-
-        this.add(vlDay, vlGroups);
+        HorizontalLayout hlGroups = new HorizontalLayout();
+        hlGroups.setWidthFull();
+        this.add(vlDay, hlGroups);
     }
 
     private void getDayBarGenerator() {
-        List<Day> days = facade.getAllDays();
+        List<Day> days = dayFacade.getAllDays();
         for(Day day: days) {
             dayBar(day.getDayName(),day.getDate().toString(), styleMgr.getDaysColor().get(day.getDayName()));
         }
