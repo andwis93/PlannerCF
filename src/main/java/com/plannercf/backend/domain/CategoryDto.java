@@ -1,13 +1,19 @@
 package com.plannercf.backend.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CategoryDto {
-    private Long id;
+public class CategoryDto extends BaseEntityDto{
     private String name;
+
+    public CategoryDto(Long id, String name) {
+        super(id);
+        this.name = name;
+    }
+
+    public CategoryDto(String name) {
+        this.name = name;
+    }
 }
