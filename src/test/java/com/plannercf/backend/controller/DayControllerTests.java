@@ -55,7 +55,7 @@ public class DayControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .contentType(jsonContent))
-                .andExpect((MockMvcResultMatchers.status().isOk()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.date", Matchers.is("2023-12-23")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.dayName", Matchers.is("SATURDAY")));
