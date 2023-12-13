@@ -53,4 +53,20 @@ public class CategoryControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("TestDto")));
     }
 
+    @Test
+    void shouldGetCategory() throws Exception {
+        //Given
+        when(facade.getCategory(1L)).thenReturn(category);
+        when(mapper.mapToCategoryDto(category)).thenReturn(categoryDto);
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/plannercf/category/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("TestDto")));
+    }
 }
