@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -37,7 +36,8 @@ public class DayControllerTests {
 
     Day day = new Day(1L, LocalDate.of(2023,12,23));
     DayDto dayDto = new DayDto(1L, LocalDate.of(2023,12,23), "SATURDAY");
-
+    List<Day> days = List.of(day, new Day(2L, LocalDate.of(2023,12,24)));
+    List<DayDto> daysDto = List.of(dayDto, new DayDto(2L, LocalDate.of(2023,12,24), "SUNDAY"));
     @Test
     void shouldSaveDay() throws Exception {
         //Given
@@ -64,16 +64,6 @@ public class DayControllerTests {
     @Test
     void shouldCreateDays() throws Exception {
         //Given
-        Day day2 = new Day(2L, LocalDate.of(2023,12,24));
-        List<Day> days = new ArrayList<>();
-        days.add(day);
-        days.add(day2);
-
-        DayDto dayDto2 = new DayDto(2L, LocalDate.of(2023,12,24), "SUNDAY");
-        List<DayDto> daysDto = new ArrayList<>();
-        daysDto.add(dayDto);
-        daysDto.add(dayDto2);
-
         when(facade.createDays(2, LocalDate.of(2023,12,23))).thenReturn(days);
         when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
         Gson gson = new GsonBuilder()
@@ -118,16 +108,6 @@ public class DayControllerTests {
     @Test
     void shouldGetAllDays() throws Exception {
         //Given
-        Day day2 = new Day(2L, LocalDate.of(2023,12,24));
-        List<Day> days = new ArrayList<>();
-        days.add(day);
-        days.add(day2);
-
-        DayDto dayDto2 = new DayDto(2L, LocalDate.of(2023,12,24), "SUNDAY");
-        List<DayDto> daysDto = new ArrayList<>();
-        daysDto.add(dayDto);
-        daysDto.add(dayDto2);
-
         when(facade.getAllDays()).thenReturn(days);
         when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
 
@@ -143,14 +123,8 @@ public class DayControllerTests {
     @Test
     void shouldGetLatestDay() throws Exception {
         //Given
-        List<Day> days = new ArrayList<>();
-        days.add(day);
-
-        List<DayDto> daysDto = new ArrayList<>();
-        daysDto.add(dayDto);
-
-        when(facade.getLatestDay()).thenReturn(days);
-        when(mapper.mapToDayDtoList(days)).thenReturn(daysDto);
+        when(facade.getLatestDay()).thenReturn(List.of(days.get(1)));
+        when(mapper.mapToDayDtoList(List.of(days.get(1)))).thenReturn(List.of(daysDto.get(1)));
 
         //When & Then
         mockMvc
@@ -159,9 +133,9 @@ public class DayControllerTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-23")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dayName", Matchers.is("SATURDAY")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].date", Matchers.is("2023-12-24")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dayName", Matchers.is("SUNDAY")));
     }
 
     @Test
