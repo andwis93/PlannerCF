@@ -51,7 +51,7 @@ public class DayControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/plannercf/day/one/2023-12-23")
+                        .post("/plannercf/day/one/{date}", LocalDate.of(2023,12,23))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -96,7 +96,7 @@ public class DayControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/plannercf/day/2023-12-23")
+                        .get("/plannercf/day/{date}", LocalDate.of(2023,12,23))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -144,7 +144,7 @@ public class DayControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/plannercf/day/2023-12-23")
+                        .delete("/plannercf/day/{date}",LocalDate.of(2023,12,23))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -155,7 +155,7 @@ public class DayControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/plannercf/day/old/2023-12-24")
+                        .delete("/plannercf/day/old/{date}", LocalDate.of(2023,12,24))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
