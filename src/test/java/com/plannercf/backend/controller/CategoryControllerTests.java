@@ -65,7 +65,7 @@ public class CategoryControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/plannercf/category/1")
+                        .get("/plannercf/category/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -104,13 +104,35 @@ public class CategoryControllerTests {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .put("/plannercf/category/1")
+                        .put("/plannercf/category/{id}",1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("TestDtoChanged")));
+    }
+
+    @Test
+    void shouldDeleteCategory() throws Exception {
+        //Given
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/plannercf/category/{id}",1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void shouldDeleteAllCategories() throws Exception {
+        //Given
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .delete("/plannercf/category/all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }
